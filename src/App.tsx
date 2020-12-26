@@ -1,26 +1,51 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { IImageItem } from './@types/IImageItem';
+import Carousel from './Carousel';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+interface IAppProps {
+  name?: string;
 }
 
+const App: React.FC<IAppProps> = () => {
+  const list: IImageItem[] = [
+    {
+      image_url: 'node1.png',
+    },
+    {
+      image_url: 'node2.png',
+    },
+    {
+      image_url: 'node3.jpg',
+    },
+    {
+      image_url: 'node4.jpg',
+    },
+    {
+      image_url: 'react1.jpg',
+    },
+    {
+      image_url: 'react2.png',
+    },
+    {
+      image_url: 'react4.png',
+    },
+  ];
+
+  return (
+    <>
+      <div style={slider}>
+        <Carousel width={1000} images={list} />
+      </div>
+    </>
+  );
+};
+
 export default App;
+
+const slider: React.CSSProperties = {
+  display: 'flex',
+  boxSizing: 'border-box',
+  flex: 1,
+  width: '1000px',
+  height: '300px',
+};
