@@ -36,13 +36,15 @@ const Arrow: React.FC<IArrowProps> = ({
 export default Arrow;
 
 const arrowContainer: React.CSSProperties = {
-  position: 'absolute',
   display: 'flex',
+  position: 'absolute',
+  top: '0',
+  height: '100%',
+  width: '50px',
   justifyContent: 'center',
   alignItems: 'center',
-  top: '0',
-  width: '10%',
-  height: '100%',
+  cursor: 'pointer',
+  transition: 'transform ease-in 0.1s',
   backgroundColor: '#c9c9c9',
   border: '0px',
 };

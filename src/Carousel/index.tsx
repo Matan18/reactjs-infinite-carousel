@@ -1,9 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { IImageItem } from '../@types/IImageItem';
 import Arrow from './Arrow';
-// import Arrow from './Arrow';
 import Slide from './Slide';
 import SliderContent from './SliderContent';
+
+export interface IImageItem<T = undefined> {
+  image_url: string;
+  data?: T;
+}
 
 interface ICarouselProps {
   images: IImageItem[];
