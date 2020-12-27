@@ -1,46 +1,52 @@
-# Getting Started with Create React App
+# reactjs-infinite-carousel
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a React component to have an infinite image carousel
 
-## Available Scripts
+To install the lib run one of the following commands according to your package manager;
 
-In the project directory, you can run:
+```bash
+yarn reactjs-infinite-carousel
+```
+or
+```bash
+npm i reactjs-infinite-carousel
+```
 
-### `yarn start`
+To use the component, you need to set a list of objects in the following structure, and to set the width of the component;
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```ts
+{
+  image_url: string
+}
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+For example
 
-### `yarn test`
+```js
+const list =[
+  {
+    image_url:'https://avatars0.githubusercontent.com/u/54731808?s=460&u=f1dd2199406981cedca881fca032889be8408878&v=4'
+  },
+  {
+    image_url:'https://avatars0.githubusercontent.com/u/54731808?s=460&u=f1dd2199406981cedca881fca032889be8408878&v=4'
+  },
+  {
+    image_url:'https://avatars0.githubusercontent.com/u/54731808?s=460&u=f1dd2199406981cedca881fca032889be8408878&v=4'
+  },
+]
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+And pass as arguments like this
 
-### `yarn build`
+```js
+<Carousel images={list} width={500}/>
+// In this example, the Carousel will be in 500px width
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+I also recommend placing the component in a div container that will contain the height of the component
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+```js
+<div style={{height: '200px'}}>
+  <Carousel images={list} width={500}/>
+</div>
+```
