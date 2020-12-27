@@ -1,9 +1,18 @@
 {
   "name": "reactjs-infinite-carousel",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "private": false,
   "license": "MIT",
   "author": "Mateus Andriola <mateusandriola18@gmail.com>",
+  "description": "React Component to create an infinite carousel",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Matan18/reactjs-infinite-carousel.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Matan18/reactjs-infinite-carousel/issues"
+  },
+  "homepage": "https://github.com/Matan18/reactjs-infinite-carousel#readme",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "source": "src/index.ts",

@@ -11,13 +11,14 @@ export interface IImageItem<T = undefined> {
 interface ICarouselProps {
   images: IImageItem[];
   width: number;
+  autoPlay?: number;
 }
 
 const Carousel: React.FC<ICarouselProps> = ({
   images,
   width,
+  autoPlay,
 }: ICarouselProps) => {
-  // const autoPlay = 2;
   const firstSlide = images[0];
   const secondSlide = images[1];
   const lastSlide = images[images.length - 1];
@@ -67,22 +68,24 @@ const Carousel: React.FC<ICarouselProps> = ({
   }, [activeSlide, firstSlide, secondSlide, lastSlide, images, state]);
 
   useEffect(() => {
-    // const play = () => {
-    //   nextSlide();
-    // };
+    const play = () => {
+      nextSlide();
+    };
 
     const smooth = () => {
       smoothTransition();
     };
 
-    // const interval = setInterval(play, autoPlay * 1000);
+    const interval = autoPlay ? setInterval(play, autoPlay * 1000) : undefined;
     sliderRef.current?.addEventListener('transitionend', smooth);
 
     return () => {
-      // clearInterval(interval);
+      if (interval) {
+        clearInterval(interval);
+      }
       sliderRef.current?.removeEventListener('transitionend', smooth);
     };
-  }, [nextSlide, smoothTransition]);
+  }, [nextSlide, smoothTransition, autoPlay]);
 
   useEffect(() => {
     if (transition === 0) setState({ ...state, transition: 0.7 });

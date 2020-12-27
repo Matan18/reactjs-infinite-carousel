@@ -32,6 +32,13 @@
     "no-use-before-define": "off",
     "prettier/prettier": "error",
     "@typescript-eslint/camlecase": "off",
+    "react/require-default-props": [
+      0,
+      {
+        "forbidDefaultForRequired": true,
+        "ignoreFunctionalComponents": true
+      }
+    ],
     "@typescript-eslint/naming-convention": [
       "error",
       {
