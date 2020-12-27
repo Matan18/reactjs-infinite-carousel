@@ -21,14 +21,13 @@ export default [
     plugins: [
       del({ targets: ['dist/*', 'playground/src/component-lib'] }),
       typescript({
+        rollupCommonJSResolveHack: false,
+        clean: true,
         tsconfigOverride: {
           compilerOptions: {
             declarationDir: path.resolve(PACKAGE_ROOT_PATH, './typings'),
-            declarationMap: true,
           },
         },
-        rollupCommonJSResolveHack: true,
-        useTsconfigDeclarationDir: true,
       }),
     ],
     external: Object.keys(pkg.peerDependencies || {}),

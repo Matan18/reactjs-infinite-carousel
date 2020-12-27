@@ -6,7 +6,7 @@
 /.pnp
 .pnp.js
 /dist
-/typings
+/@types
 
 # testing
 /coverage
