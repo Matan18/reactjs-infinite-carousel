@@ -20,14 +20,9 @@ const Arrow: React.FC<IArrowProps> = ({
       }}
     >
       {direction === 'right' ? (
-        <img
-          src="/chevronRight.svg"
-          alt="ChevronRight"
-          width={40}
-          height={40}
-        />
+        <p style={{ fontSize: '40px', height: '40px', width: '40px' }}>{'>'}</p>
       ) : (
-        <img src="/chevronLeft.svg" alt="ChevronLeft" width={40} height={40} />
+        <p style={{ fontSize: '40px', height: '40px', width: '40px' }}>{'<'}</p>
       )}
     </button>
   );
