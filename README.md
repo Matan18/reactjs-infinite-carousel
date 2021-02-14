@@ -1,7 +1,7 @@
 # reactjs-infinite-carousel
 ## &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Matan18/reactjs-infinite-carousel/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/reactjs-infinite-carousel.svg?style=flat)](https://www.npmjs.com/package/reactjs-infinite-carousel)
 
-This is a React component to have an infinite image carousel
+This is a React component to have an infinite carousel
 
 To install the lib run one of the following commands according to your package manager;
 
