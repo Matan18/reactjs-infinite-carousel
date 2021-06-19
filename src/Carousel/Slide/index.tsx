@@ -1,31 +1,21 @@
 import React from 'react';
 
 interface ISlideProps {
-  content: string;
-  width: number;
+  children?: React.ReactNode;
 }
 
-const Slide: React.FC<ISlideProps> = ({ content, width }: ISlideProps) => {
+const Slide: React.FC<ISlideProps> = ({ children }: ISlideProps) => {
   return (
-    <div
+    <section
       style={{
         width: '100%',
         height: '100%',
         position: 'relative',
+        flex: 'none',
       }}
     >
-      <img
-        src={content}
-        alt={content}
-        style={{
-          width: `${width}px`,
-          height: '100%',
-          objectFit: 'cover',
-          position: 'relative',
-          zIndex: 0,
-        }}
-      />
-    </div>
+      {children}
+    </section>
   );
 };
 

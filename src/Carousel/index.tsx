@@ -8,17 +8,17 @@ export interface IImageItem<T = undefined> {
   data?: T;
 }
 
-interface ICarouselProps {
-  images: IImageItem[];
-  width: number;
+interface ICarouselProps<T = undefined> {
+  images: IImageItem<T>[];
+  CustomComponent: React.FC<{ item: IImageItem<T> }>;
   autoPlay?: number;
 }
 
-const Carousel: React.FC<ICarouselProps> = ({
+function Carousel<CustomDataType>({
   images,
-  width,
   autoPlay,
-}: ICarouselProps) => {
+  CustomComponent,
+}: ICarouselProps<CustomDataType>): JSX.Element {
   const firstSlide = images[0];
   const secondSlide = images[1];
   const lastSlide = images[images.length - 1];
@@ -98,7 +98,7 @@ const Carousel: React.FC<ICarouselProps> = ({
       }}
       style={{
         flex: 1,
-        width: `${width}px`,
+        width: '100%',
         height: '100%',
         margin: '0px',
         position: 'relative',
@@ -107,17 +107,15 @@ const Carousel: React.FC<ICarouselProps> = ({
     >
       <SliderContent translate={translate} transition={transition}>
         {_slides.map(image => (
-          <Slide
-            key={image.image_url}
-            width={width}
-            content={image.image_url}
-          />
+          <Slide key={image.image_url}>
+            <CustomComponent item={image} />
+          </Slide>
         ))}
       </SliderContent>
       <Arrow handleClick={prevSlide} direction="left" />
       <Arrow handleClick={nextSlide} direction="right" />
     </div>
   );
-};
+}
 
 export default Carousel;
