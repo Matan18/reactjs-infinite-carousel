@@ -28,10 +28,11 @@
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "import/prefer-default-export": "off",
+    "import/no-unresolved": "error",
     "@typescript-eslint/ban-types": "off",
     "no-use-before-define": "off",
     "prettier/prettier": "error",
-    "@typescript-eslint/camlecase": "off",
+    "@typescript-eslint/camelcase": "off",
     "react/require-default-props": [
       0,
       {
