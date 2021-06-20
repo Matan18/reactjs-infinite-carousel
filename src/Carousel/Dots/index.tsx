@@ -1,26 +1,45 @@
 import React from 'react';
+import { IImageItem } from '..';
+import Dot from './Dot';
 
-interface IDotProps {
-  active: boolean;
-}
-
-const Dot: React.FC<IDotProps> = ({ active }: IDotProps) => {
-  return <span style={{ background: `${active ? 'white' : 'none'}` }} />;
-};
-
-interface IDotsProps {
-  slides: string[];
+export interface IDotsProps<T> {
+  slides: IImageItem<T>[];
+  activeColor?: string;
+  defaultColor?: string;
   activeIndex: number;
+  handleClick?: (index: number) => void;
 }
 
-const Dots: React.FC<IDotsProps> = ({ slides, activeIndex }: IDotsProps) => {
+function Dots<CustomImageData>({
+  slides,
+  activeIndex,
+  handleClick,
+  activeColor,
+  defaultColor,
+}: IDotsProps<CustomImageData>): JSX.Element {
   return (
-    <div>
+    <div
+      style={{
+        height: '20px',
+        position: 'absolute',
+        bottom: '10px',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        display: 'flex',
+      }}
+    >
       {slides.map((slide, index) => (
-        <Dot key={slide} active={activeIndex === index} />
+        <Dot
+          key={slide.image_url}
+          index={index}
+          handleClick={handleClick}
+          active={activeIndex === index}
+          activeColor={activeColor}
+          defaultColor={defaultColor}
+        />
       ))}
     </div>
   );
-};
+}
 
 export default Dots;
