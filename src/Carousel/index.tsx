@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Arrow from './Arrow';
+import Dots, { IDotsProps } from './Dots';
 import Slide from './Slide';
 import SliderContent from './SliderContent';
 
@@ -11,13 +12,21 @@ export interface IImageItem<T = undefined> {
 interface ICarouselProps<T = undefined> {
   images: IImageItem<T>[];
   CustomComponent: React.FC<{ item: IImageItem<T> }>;
+  CustomDots?: React.FC<IDotsProps<T>>;
+  desactiveDots?: boolean;
   autoPlay?: number;
+  activeColor?: string;
+  defaultColor?: string;
 }
 
 function Carousel<CustomDataType>({
   images,
   autoPlay,
   CustomComponent,
+  activeColor,
+  defaultColor,
+  desactiveDots,
+  CustomDots,
 }: ICarouselProps<CustomDataType>): JSX.Element {
   const firstSlide = images[0];
   const secondSlide = images[1];
@@ -67,6 +76,49 @@ function Carousel<CustomDataType>({
     });
   }, [activeSlide, firstSlide, secondSlide, lastSlide, images, state]);
 
+  const setSlide = useCallback(
+    (index: number) => {
+      if (activeSlide - index === 1) {
+        prevSlide();
+        return;
+      }
+      if (activeSlide - index === -1) {
+        nextSlide();
+        return;
+      }
+      if (index === 0) {
+        setState(prevState => ({
+          ...prevState,
+          activeSlide: index,
+          _slides: [lastSlide, firstSlide, secondSlide],
+        }));
+        return;
+      }
+      if (index === images.length - 1) {
+        setState(prevState => ({
+          ...prevState,
+          activeSlide: index,
+          _slides: [images[images.length - 2], lastSlide, firstSlide],
+        }));
+        return;
+      }
+      setState(prevState => ({
+        ...prevState,
+        activeSlide: index,
+        _slides: images.slice(index - 1, index + 2),
+      }));
+    },
+    [
+      activeSlide,
+      firstSlide,
+      images,
+      lastSlide,
+      nextSlide,
+      prevSlide,
+      secondSlide,
+    ],
+  );
+
   useEffect(() => {
     const play = () => {
       nextSlide();
@@ -112,6 +164,27 @@ function Carousel<CustomDataType>({
           </Slide>
         ))}
       </SliderContent>
+      {!desactiveDots && (
+        <>
+          {CustomDots ? (
+            <CustomDots
+              handleClick={setSlide}
+              slides={images}
+              activeIndex={activeSlide}
+              activeColor={activeColor}
+              defaultColor={defaultColor}
+            />
+          ) : (
+            <Dots
+              handleClick={setSlide}
+              slides={images}
+              activeIndex={activeSlide}
+              activeColor={activeColor}
+              defaultColor={defaultColor}
+            />
+          )}
+        </>
+      )}
       <Arrow handleClick={prevSlide} direction="left" />
       <Arrow handleClick={nextSlide} direction="right" />
     </div>
