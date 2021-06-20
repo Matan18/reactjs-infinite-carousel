@@ -35,6 +35,7 @@
     "no-use-before-define": "off",
     "prettier/prettier": "error",
     "@typescript-eslint/camelcase": "off",
+    "react/jsx-pascal-case": ["off", { "allowAllCaps": "error", "allowNamespace": "off" }],
     "react/require-default-props": [
       0,
       {

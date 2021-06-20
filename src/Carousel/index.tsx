@@ -12,6 +12,10 @@ export interface IImageItem<T = undefined> {
 interface ICarouselProps<T = undefined> {
   images: IImageItem<T>[];
   CustomComponent: React.FC<{ item: IImageItem<T> }>;
+  Arrows?: {
+    left: React.FC<{ handleClick: () => void }>;
+    right: React.FC<{ handleClick: () => void }>;
+  };
   CustomDots?: React.FC<IDotsProps<T>>;
   desactiveDots?: boolean;
   autoPlay?: number;
@@ -27,6 +31,7 @@ function Carousel<CustomDataType>({
   defaultColor,
   desactiveDots,
   CustomDots,
+  Arrows,
 }: ICarouselProps<CustomDataType>): JSX.Element {
   const firstSlide = images[0];
   const secondSlide = images[1];
@@ -185,8 +190,16 @@ function Carousel<CustomDataType>({
           )}
         </>
       )}
-      <Arrow handleClick={prevSlide} direction="left" />
-      <Arrow handleClick={nextSlide} direction="right" />
+      {Arrows?.left ? (
+        <Arrows.left handleClick={prevSlide} />
+      ) : (
+        <Arrow handleClick={prevSlide} direction="left" />
+      )}
+      {Arrows?.right ? (
+        <Arrows.right handleClick={prevSlide} />
+      ) : (
+        <Arrow handleClick={nextSlide} direction="right" />
+      )}
     </div>
   );
 }
