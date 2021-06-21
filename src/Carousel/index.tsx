@@ -18,6 +18,7 @@ interface ICarouselProps<T = undefined> {
   };
   CustomDots?: React.FC<IDotsProps<T>>;
   desactiveDots?: boolean;
+  desactiveArrows?: boolean;
   autoPlay?: number;
   activeColor?: string;
   defaultColor?: string;
@@ -30,6 +31,7 @@ function Carousel<CustomDataType>({
   activeColor,
   defaultColor,
   desactiveDots,
+  desactiveArrows,
   CustomDots,
   Arrows,
 }: ICarouselProps<CustomDataType>): JSX.Element {
@@ -190,15 +192,19 @@ function Carousel<CustomDataType>({
           )}
         </>
       )}
-      {Arrows?.left ? (
-        <Arrows.left handleClick={prevSlide} />
-      ) : (
-        <Arrow handleClick={prevSlide} direction="left" />
-      )}
-      {Arrows?.right ? (
-        <Arrows.right handleClick={prevSlide} />
-      ) : (
-        <Arrow handleClick={nextSlide} direction="right" />
+      {!desactiveArrows && (
+        <>
+          {Arrows?.left ? (
+            <Arrows.left handleClick={prevSlide} />
+          ) : (
+            <Arrow handleClick={prevSlide} direction="left" />
+          )}
+          {Arrows?.right ? (
+            <Arrows.right handleClick={prevSlide} />
+          ) : (
+            <Arrow handleClick={nextSlide} direction="right" />
+          )}
+        </>
       )}
     </div>
   );
