@@ -51,21 +51,21 @@ const list:IImageItem[]=[
 And pass as arguments like this
 
 ```js
-<Carousel images={list} width={500}/>
+<Carousel images={list} />
 // In this example, the Carousel will be in 500px width
 ```
 
-I also recommend placing the component in a div container that will set the height of the component
+I recommend placing the component in a div container that will set the height and width of the component
 
 ```js
-<div style={{height: '200px'}}>
-  <Carousel images={list} width={500}/>
+<div style={{height: '200px', width: '400px' }}>
+  <Carousel images={list} />
 </div>
 ```
 
 As optional, you can pass an autoPlay prop that is in seconds to change each image
 
 ```js
-  <Carousel images={list} width={1000} autoPlay={1} />
+  <Carousel images={list} autoPlay={1} />
   // Intervals of 1 second
 ```
