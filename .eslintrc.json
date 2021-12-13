@@ -18,6 +18,10 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
+  "globals": {
+    "react": true,
+    "JSX": true
+  },
   "plugins": [
     "@typescript-eslint",
     "react-hooks",
@@ -25,17 +29,24 @@
     "prettier"
   ],
   "rules": {
+    "react/prop-types": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "import/prefer-default-export": "off",
-    "jsx-a11y/no-static-element-interactions":"off",
-    "jsx-a11y/click-events-have-key-events":"off",
+    "jsx-a11y/no-static-element-interactions": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
     "import/no-unresolved": "error",
     "@typescript-eslint/ban-types": "off",
     "no-use-before-define": "off",
     "prettier/prettier": "error",
     "@typescript-eslint/camelcase": "off",
-    "react/jsx-pascal-case": ["off", { "allowAllCaps": "error", "allowNamespace": "off" }],
+    "react/jsx-pascal-case": [
+      "off",
+      {
+        "allowAllCaps": "error",
+        "allowNamespace": "off"
+      }
+    ],
     "react/require-default-props": [
       0,
       {

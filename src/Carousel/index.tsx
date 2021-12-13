@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Arrow from './Arrow';
+import DefaultComponent from './DefaultComponent';
 import Dots, { IDotsProps } from './Dots';
 import Slide from './Slide';
 import SliderContent from './SliderContent';
@@ -11,7 +12,7 @@ export interface IImageItem<T = undefined> {
 
 interface ICarouselProps<T = undefined> {
   images: IImageItem<T>[];
-  CustomComponent: React.FC<{ item: IImageItem<T> }>;
+  CustomComponent?: React.FC<{ item: IImageItem<T> }>;
   Arrows?: {
     left: React.FC<{ handleClick: () => void }>;
     right: React.FC<{ handleClick: () => void }>;
@@ -167,7 +168,11 @@ function Carousel<CustomDataType>({
       <SliderContent translate={translate} transition={transition}>
         {_slides.map(image => (
           <Slide key={image.image_url}>
-            <CustomComponent item={image} />
+            {CustomComponent ? (
+              <CustomComponent item={image} />
+            ) : (
+              <DefaultComponent item={image} />
+            )}
           </Slide>
         ))}
       </SliderContent>
