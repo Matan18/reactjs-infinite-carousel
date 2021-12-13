@@ -14,17 +14,16 @@ const Dot: React.FC<IDotProps> = ({
   handleClick,
   activeColor,
   defaultColor,
-}: IDotProps) => {
-  return (
-    <span
-      onClick={() => (handleClick ? handleClick(index) : null)}
-      style={{
-        background: active ? activeColor || 'red' : defaultColor || 'white',
-        width: '10px',
-        height: '10px',
-        borderRadius: '50%',
-      }}
-    />
-  );
-};
+}: IDotProps) => (
+  <span
+    onClick={() => (handleClick ? handleClick(index) : null)}
+    style={{
+      background: active ? activeColor || 'red' : defaultColor || 'white',
+      width: '10px',
+      height: '10px',
+      borderRadius: '50%',
+    }}
+  />
+);
+
 export default Dot;

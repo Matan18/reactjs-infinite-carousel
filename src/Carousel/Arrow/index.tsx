@@ -8,25 +8,23 @@ interface IArrowProps {
 const Arrow: React.FC<IArrowProps> = ({
   direction,
   handleClick,
-}: IArrowProps) => {
-  return (
-    <button
-      type="button"
-      onClick={handleClick}
-      style={{
-        ...arrowContainer,
-        right: `${direction === 'right' ? '0px' : 'none'}`,
-        left: `${direction === 'left' ? '0px' : 'none'}`,
-      }}
-    >
-      {direction === 'right' ? (
-        <p style={{ fontSize: '40px', height: '40px', width: '40px' }}>{'>'}</p>
-      ) : (
-        <p style={{ fontSize: '40px', height: '40px', width: '40px' }}>{'<'}</p>
-      )}
-    </button>
-  );
-};
+}: IArrowProps) => (
+  <button
+    type="button"
+    onClick={handleClick}
+    style={{
+      ...arrowContainer,
+      right: `${direction === 'right' ? '0px' : 'none'}`,
+      left: `${direction === 'left' ? '0px' : 'none'}`,
+    }}
+  >
+    {direction === 'right' ? (
+      <p style={{ fontSize: '40px', height: '40px', width: '40px' }}>{'>'}</p>
+    ) : (
+      <p style={{ fontSize: '40px', height: '40px', width: '40px' }}>{'<'}</p>
+    )}
+  </button>
+);
 
 export default Arrow;
 
