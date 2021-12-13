@@ -36,9 +36,11 @@ function Carousel<CustomDataType>({
   CustomDots,
   Arrows,
 }: ICarouselProps<CustomDataType>): JSX.Element {
+  const isMultiElements = images.length > 1;
+
   const firstSlide = images[0];
-  const secondSlide = images[1];
-  const lastSlide = images[images.length - 1];
+  const secondSlide = images[1] || null;
+  const lastSlide = isMultiElements ? images[images.length - 1] : null;
 
   const [state, setState] = useState({
     activeSlide: 0,
@@ -52,20 +54,26 @@ function Carousel<CustomDataType>({
   const sliderRef = useRef<HTMLDivElement>();
 
   const nextSlide = useCallback(() => {
-    setState({
-      ...state,
-      translate: translate + 100,
-      activeSlide: activeSlide === images.length - 1 ? 0 : activeSlide + 1,
-    });
-  }, [activeSlide, images, setState, state, translate]);
+    setState(prevState => ({
+      ...prevState,
+      translate: prevState.translate + 100,
+      activeSlide:
+        prevState.activeSlide === images.length - 1
+          ? 0
+          : prevState.activeSlide + 1,
+    }));
+  }, [images, setState]);
 
   const prevSlide = useCallback(() => {
-    setState({
-      ...state,
+    setState(prevState => ({
+      ...prevState,
       translate: 0,
-      activeSlide: activeSlide === 0 ? images.length - 1 : activeSlide - 1,
-    });
-  }, [activeSlide, images, state]);
+      activeSlide:
+        prevState.activeSlide === 0
+          ? images.length - 1
+          : prevState.activeSlide - 1,
+    }));
+  }, [images]);
 
   const smoothTransition = useCallback(() => {
     let newSlides = [];
@@ -86,6 +94,7 @@ function Carousel<CustomDataType>({
 
   const setSlide = useCallback(
     (index: number) => {
+      if (!isMultiElements) return;
       if (activeSlide - index === 1) {
         prevSlide();
         return;
@@ -117,6 +126,7 @@ function Carousel<CustomDataType>({
       }));
     },
     [
+      isMultiElements,
       activeSlide,
       firstSlide,
       images,
@@ -165,18 +175,27 @@ function Carousel<CustomDataType>({
         overflow: 'hidden',
       }}
     >
-      <SliderContent translate={translate} transition={transition}>
-        {_slides.map(image => (
-          <Slide key={image.image_url}>
-            {CustomComponent ? (
-              <CustomComponent item={image} />
-            ) : (
-              <DefaultComponent item={image} />
-            )}
-          </Slide>
-        ))}
+      <SliderContent
+        translate={isMultiElements ? translate : 0}
+        transition={transition}
+      >
+        {_slides
+          .filter(item => !!item)
+          .map(image => (
+            <>
+              {image && (
+                <Slide key={image.image_url}>
+                  {CustomComponent ? (
+                    <CustomComponent item={image} />
+                  ) : (
+                    <DefaultComponent item={image} />
+                  )}
+                </Slide>
+              )}
+            </>
+          ))}
       </SliderContent>
-      {!desactiveDots && (
+      {!desactiveDots && isMultiElements && (
         <>
           {CustomDots ? (
             <CustomDots
@@ -197,7 +216,7 @@ function Carousel<CustomDataType>({
           )}
         </>
       )}
-      {!desactiveArrows && (
+      {!desactiveArrows && isMultiElements && (
         <>
           {Arrows?.left ? (
             <Arrows.left handleClick={prevSlide} />
@@ -205,7 +224,7 @@ function Carousel<CustomDataType>({
             <Arrow handleClick={prevSlide} direction="left" />
           )}
           {Arrows?.right ? (
-            <Arrows.right handleClick={prevSlide} />
+            <Arrows.right handleClick={nextSlide} />
           ) : (
             <Arrow handleClick={nextSlide} direction="right" />
           )}
