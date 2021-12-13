@@ -38,7 +38,7 @@ function Carousel<CustomDataType>({
 }: ICarouselProps<CustomDataType>): JSX.Element {
   const isMultiElements = images.length > 1;
 
-  const firstSlide = images[0];
+  const firstSlide = images[0] || null;
   const secondSlide = images[1] || null;
   const lastSlide = isMultiElements ? images[images.length - 1] : null;
 
@@ -160,6 +160,8 @@ function Carousel<CustomDataType>({
   useEffect(() => {
     if (transition === 0) setState({ ...state, transition: 0.7 });
   }, [transition, setState, state]);
+
+  if (images.length === 0) return <></>;
 
   return (
     <div
