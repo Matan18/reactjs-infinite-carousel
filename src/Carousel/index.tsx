@@ -10,6 +10,8 @@ export interface IImageItem<T = undefined> {
   data?: T;
 }
 
+const defaultKeyExtractor = (image: IImageItem<unknown>) => image.image_url;
+
 interface ICarouselProps<T = undefined> {
   images: IImageItem<T>[];
   CustomComponent?: React.FC<{ item: IImageItem<T> }>;
@@ -20,6 +22,7 @@ interface ICarouselProps<T = undefined> {
   CustomDots?: React.FC<IDotsProps<T>>;
   desactiveDots?: boolean;
   desactiveArrows?: boolean;
+  keyExtractor?: (item: IImageItem<T>) => React.Key;
   autoPlay?: number;
   activeColor?: string;
   defaultColor?: string;
@@ -34,6 +37,7 @@ function Carousel<CustomDataType>({
   desactiveDots,
   desactiveArrows,
   CustomDots,
+  keyExtractor = defaultKeyExtractor,
   Arrows,
 }: ICarouselProps<CustomDataType>): JSX.Element {
   const isMultiElements = images.length > 1;
@@ -186,7 +190,7 @@ function Carousel<CustomDataType>({
           .map(image => (
             <>
               {image && (
-                <Slide key={image.image_url}>
+                <Slide key={keyExtractor(image)}>
                   {CustomComponent ? (
                     <CustomComponent item={image} />
                   ) : (

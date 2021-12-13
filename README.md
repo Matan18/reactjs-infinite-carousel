@@ -146,16 +146,8 @@ function App() {
 | autoPlay        | time in seconds for autoplay                       | number                                                                                                                    |
 | activeColor     | color in Dot when is respective element is in view | string                                                                                                                    |
 | defaultColor    | color in Dot                                       | string                                                                                                                    |
+| keyExtractor    | Function to defines key in each element            | (item: IImageItem&#60;T&#62;) => React.Key                                                                                |
 
 ```ts
-Arrows?: {
-  left: React.FC<{ handleClick: () => void }>;
-  right: React.FC<{ handleClick: () => void }>;
-};
-CustomDots?: React.FC<IDotsProps<T>>;
-desactiveDots?: boolean;
-desactiveArrows?: boolean;
-autoPlay?: number;
-activeColor?: string;
-defaultColor?: string;
+keyExtractor?: (item: IImageItem<T>) => React.Key;
 ```
